@@ -1,4 +1,5 @@
 import pytest
+import allure
 from selenium import webdriver
 
 @pytest.fixture
@@ -9,4 +10,5 @@ def browser():
     browser.maximize_window()
     yield browser
    
-    browser.quit()
+    with allure.step("Закрыть браузер"):
+        browser.quit()
