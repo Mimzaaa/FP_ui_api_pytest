@@ -4,8 +4,9 @@ from selenium import webdriver
 @pytest.fixture
 def browser():
     browser = webdriver.Chrome()
-    browser.implicitly_wait(4)
+    browser.get('https://www.chitai-gorod.ru/')
+    browser.implicitly_wait(10)
     browser.maximize_window()
     yield browser
-
+   
     browser.quit()
