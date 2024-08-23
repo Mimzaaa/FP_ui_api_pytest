@@ -3,9 +3,6 @@ import allure
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from pages.ui_class import HomePage
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 
 @allure.step("Проверка работы поля - Поиск")
 def test_search_functionality_1(browser: WebDriver):
