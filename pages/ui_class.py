@@ -10,7 +10,6 @@ class HomePage:
         self.__url = "https://www.chitai-gorod.ru/"
         self.__driver = driver
 
-    @allure.step("Открыть страницу в браузере")
     def go(self):
         self.__driver.get(self.__url)
 
@@ -22,14 +21,27 @@ class HomePage:
     def click_search_button(self):
         self.__driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Искать"]').click()
     
-    @allure.step("Получить сообщение с результатом поиска")
+    @allure.step("Получить страницу с результатом поиска")
     def get_search_result_message(self) -> str:
         try:
-            element_1 = WebDriverWait(self.__driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="search-page__found-message"]')))
-            return element_1.text
+            result_element_1 = WebDriverWait(self.__driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'p.search-page__found-message')))
+            result_element_1 = self.__driver.find_element(By.CSS_SELECTOR, "p.search-page__found-message")
+            result_text = result_element_1.text
+            return result_text
         except TimeoutException:
             try:
-                element_2 = WebDriverWait(self.__driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="catalog-empty-result__header"]')))
-                return element_2.text
+                result_element_2 = WebDriverWait(self.__driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'h4.catalog-empty-result__header')))
+                result_element_2 = self.__driver.find_element(By.CSS_SELECTOR, "h4.catalog-empty-result__header")
+                return result_element_2.text
             except TimeoutException:
                 return "Результаты поиска не найдены, и элемент для отображения пустого результата отсутствует."
+    
+        # try:
+        #     element_1 = WebDriverWait(self.__driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'p.search-page__found-message'))).text.strip()
+        #     return element_1
+        # except TimeoutException:
+        #     try:
+        #         element_2 = WebDriverWait(self.__driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="catalog-empty-result__header"]')))
+        #         return element_2.text
+        #     except TimeoutException:
+        #         return "Результаты поиска не найдены, и элемент для отображения пустого результата отсутствует."

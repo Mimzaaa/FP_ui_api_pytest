@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from pages.ui_class import HomePage
 
-@allure.step("Проверка работы поля - Поиск")
+@allure.title("Проверка работы поля 'Поиск'")
 def test_search_functionality_1(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -13,10 +13,10 @@ def test_search_functionality_1(browser: WebDriver):
     
     result_message = home_page.get_search_result_message()
 
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Показываем результаты по запросу" in result_message
+    with allure.step("Результат: " + result_message):
+        assert "Показываем результаты по запросу «проверка»" in result_message, "Текст не соответствует ожидаемому"
 
-@allure.step("Поле принимает данные на латинице")
+@allure.title("Поле 'Поиск' принимает данные на латинице")
 def test_search_functionality_2(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -25,10 +25,10 @@ def test_search_functionality_2(browser: WebDriver):
 
     result_message = home_page.get_search_result_message()
 
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
+    with allure.step("Результат: " + result_message):
+        assert "Показываем результаты по запросу «the miracle morning»" in result_message, "Текст не соответствует ожидаемому"
 
-@allure.step("Поле осуществляет поиск товара, состоящего из 2 букв")
+@allure.title("Поле 'Поиск' принимает данные состоящие из 2 букв")
 def test_search_functionality_3(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -37,10 +37,10 @@ def test_search_functionality_3(browser: WebDriver):
 
     result_message = home_page.get_search_result_message()
 
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
+    with allure.step("Результат: " + result_message):
+        assert "Показываем результаты по запросу «bl»" in result_message, "Текст не соответствует ожидаемому"
 
-@allure.step("Поле осуществляет поиск товара с пропущенной буквой")
+@allure.title("Поле 'Поиск' принимает данные с пропущенной буквой")
 def test_search_functionality_4(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -49,10 +49,10 @@ def test_search_functionality_4(browser: WebDriver):
 
     result_message = home_page.get_search_result_message()
 
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
+    with allure.step("Результат: " + result_message):
+        assert "Показываем результаты по запросу «ревизор»" in result_message, "Текст не соответствует ожидаемому"
 
-@allure.step("Поле осуществляет поиск товара с символом на конце запроса")
+@allure.title("Поле 'Поиск' принимает данные с символом на конце запроса")
 def test_search_functionality_5(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -61,12 +61,17 @@ def test_search_functionality_5(browser: WebDriver):
 
     result_message = home_page.get_search_result_message()
 
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
+    with allure.step("Результат: " + result_message):
+        assert "Показываем результаты по запросу «ревизор»" in result_message, "Текст не соответствует ожидаемому"
 
 
 
-@allure.step("Поиск товара, состоящего из двух слов без пробела")
+
+
+
+
+
+@allure.title("Поле 'Поиск' не принимает данные, состоящие из двух слов без пробела")
 def test_search_functionality_6(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -74,10 +79,11 @@ def test_search_functionality_6(browser: WebDriver):
     home_page.click_search_button()
     
     result_message = home_page.get_search_result_message()
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
 
-@allure.step("Поиск товара, состоящего из одной буквы")
+    with allure.step("Результат: " + result_message):
+        assert "Похоже, у нас такого нет" in result_message, "Текст не соответствует ожидаемому"
+
+@allure.title("Поле 'Поиск' не принимает данные, состоящие из одной буквы")
 def test_search_functionality_7(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -85,10 +91,11 @@ def test_search_functionality_7(browser: WebDriver):
     home_page.click_search_button()
     
     result_message = home_page.get_search_result_message()
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
+    
+    with allure.step("Результат: " + result_message):
+        assert "Похоже, у нас такого нет" in result_message, "Текст не соответствует ожидаемому"
 
-@allure.step("Поиск товара с помощью символов")
+@allure.title("Поиск товара с помощью символов")
 def test_search_functionality_8(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -96,10 +103,17 @@ def test_search_functionality_8(browser: WebDriver):
     home_page.click_search_button()
     
     result_message = home_page.get_search_result_message()
-    with allure.step("Открывается страница с результатом поиска - "):
-        assert result_message, "Похоже, у нас такого нет" in result_message
+    
+    with allure.step("Результат: " + result_message):
+        assert "Похоже, у нас такого нет" in result_message, "Текст не соответствует ожидаемому"
+
+
+
+
+
+
  
-@allure.step("Поиск товара с пустым полем")
+@allure.title("Поиск товара с пустым полем")
 def test_search_functionality_9(browser:  WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -107,10 +121,11 @@ def test_search_functionality_9(browser:  WebDriver):
     home_page.click_search_button()
     
     result_message = home_page.get_search_result_message()
-    with allure.step("Открывается страница с результатом поиска"):
+
+    with allure.step("Результат: " + result_message):
         assert result_message == "Результаты поиска не найдены, и элемент для отображения пустого результата отсутствует."
 
-@allure.step("Поиск товара с данными из пробелов")
+@allure.title("Поиск товара с данными из пробелов")
 def test_search_functionality_10(browser: WebDriver):
     home_page = HomePage(browser)
     home_page.go()
@@ -118,5 +133,6 @@ def test_search_functionality_10(browser: WebDriver):
     home_page.click_search_button()
     
     result_message = home_page.get_search_result_message()
-    with allure.step("Открывается страница с результатом поиска"):
+
+    with allure.step("Результат: " + result_message):
         assert result_message == "Результаты поиска не найдены, и элемент для отображения пустого результата отсутствует."
