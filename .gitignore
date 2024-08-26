@@ -1,4 +1,6 @@
-*allure-results
+*allure
+allure-results/
+allure-report/
 __init__.py
 
 # Byte-compiled / optimized / DLL files
