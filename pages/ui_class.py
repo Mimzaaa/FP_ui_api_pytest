@@ -35,13 +35,3 @@ class HomePage:
                 return result_element_2.text
             except TimeoutException:
                 return "Результаты поиска не найдены, и элемент для отображения пустого результата отсутствует."
-    
-        # try:
-        #     element_1 = WebDriverWait(self.__driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'p.search-page__found-message'))).text.strip()
-        #     return element_1
-        # except TimeoutException:
-        #     try:
-        #         element_2 = WebDriverWait(self.__driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="catalog-empty-result__header"]')))
-        #         return element_2.text
-        #     except TimeoutException:
-        #         return "Результаты поиска не найдены, и элемент для отображения пустого результата отсутствует."
