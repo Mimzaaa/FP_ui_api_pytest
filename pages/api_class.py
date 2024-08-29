@@ -1,16 +1,22 @@
 import requests
+from configuration.ConfigProvider import ConfigProvider
+import requests
 
 class ApiReadCity:
 
-    def __init__(self, base_url="https://web-gate.chitai-gorod.ru/api", city_id=213, token=None):
-        self.base_url = base_url
-        self.city_id = city_id
-        self.token = token
+    def __init__(self, config_provider: ConfigProvider):
+        api_config = config_provider.get_api_config()
+        self.base_url = api_config['base_url']
+        self.city_id = api_config['city_id']
+        self.token = api_config['token']
 
     def get_headers(self):
         headers = {}
         if self.token:
-            headers["Authorization"] = f"Bearer {self.token}"
+            headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.token}"
+            }
         return headers
 
     def get(self, endpoint, params=None):
@@ -31,18 +37,23 @@ class ApiReadCity:
         }
         return self.get(endpoint, params=params)
 
+
+
     def post(self, endpoint, data=None):
         url = f"{self.base_url}{endpoint}"
         headers = self.get_headers()
         response = requests.post(url, json=data, headers=headers)
         response.raise_for_status()
         return response
-    
+
     def add_bookmark(self, book_id):
         endpoint = "/v1/bookmarks"
         data = {"id": book_id}
-        return self.post(endpoint, data=data)
-    
+        response = self.post(endpoint, data=data)
+        return response
+
+
+
     def delete(self, endpoint, data=None):
         url = f"{self.base_url}{endpoint}"
         headers = self.get_headers()
@@ -55,6 +66,8 @@ class ApiReadCity:
         data = {"id": book_id}
         return self.delete(endpoint, data=data)
     
+
+
     def patch(self, endpoint, data=None):
         url = f"{self.base_url}{endpoint}"
         headers = self.get_headers()

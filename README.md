@@ -22,7 +22,6 @@ API-тесты выполнены методами GET, POST, DELETE и PATCH. �
 - pytest
 - selenium
 - requests
-- _sqlalchemy_
 - allure
 - config
 
@@ -30,13 +29,17 @@ API-тесты выполнены методами GET, POST, DELETE и PATCH. �
 - ./test - тесты
 - ./pages - описание страниц
 - ./api - хелперы для работы с API
-- ./db - хелперы для работы с БД (!)
+- ./configuration - провайдер настроек
+    - test_config.ini - настройки для тестов
+- ./testdata - провайдер тестовых данных
+    - test_data.json
 
 ### Полезные ссылки:
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
 - [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore/)
+- [Про configparser](https://docs.python.org/3/library/configparser.html#module-configparser)
 
-### Библиотеки: (!)
+### Библиотеки:
 - pip3 install pytest
 - pip3 install selenium
 - pip3 install webdriver-manager

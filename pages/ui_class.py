@@ -1,13 +1,15 @@
 import allure
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from configuration.ConfigProvider import ConfigProvider
 
 class HomePage:
-    def __init__(self, driver: WebDriver) -> None:
-        self.__url = "https://www.chitai-gorod.ru/"
+    
+    def __init__(self, driver, config_provider: ConfigProvider):
+        ui_config = config_provider.get_ui_config()
+        self.__url = ui_config['homepage_url']
         self.__driver = driver
 
     def go(self):

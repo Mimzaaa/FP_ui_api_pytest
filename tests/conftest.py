@@ -2,11 +2,8 @@ import pytest
 import allure
 from selenium import webdriver
 from pages.api_class import ApiReadCity
-
-@pytest.fixture(scope="module")
-def api_client():
-    token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3VzZXItcmlnaHQiLCJzdWIiOjEwNDQxOTU4LCJpYXQiOjE3MjQ4NTA1NjgsImV4cCI6MTcyNDg1NDE2OCwidHlwZSI6MjB9.cQCiI37drxMQ4wYlbyNP9FzWX78tUQcBjhYRVFPBa0k"
-    return ApiReadCity(token=token)
+from configuration.ConfigProvider import ConfigProvider
+from testdata.DataProvider import DataProvider
 
 @pytest.fixture
 def browser():
@@ -18,3 +15,19 @@ def browser():
    
     with allure.step("Закрыть браузер"):
         browser.quit()
+
+@pytest.fixture
+def config_provider():
+    return ConfigProvider()
+
+@pytest.fixture
+def data_provider():
+    return DataProvider()
+
+@pytest.fixture
+def api_client(config_provider):
+    return ApiReadCity(config_provider)
+
+@pytest.fixture()
+def test_data():
+    return DataProvider()
