@@ -6,12 +6,25 @@ from selenium.common.exceptions import TimeoutException
 from configuration.ConfigProvider import ConfigProvider
 
 class HomePage:
-    
+    """
+    Класс для взаимодействия с главной страницей сайта.
+
+    Атрибуты:
+        __url (str): URL главной страницы.
+        __driver (WebDriver): Объект веб-драйвера.
+
+    Методы:
+        go(): Открывает главную страницу.
+        search(query: str): Выполняет поиск по введенному запросу.
+        click_search_button(): Нажимает кнопку поиска.
+        get_search_result_message() -> str: Получает сообщение о результате поиска.
+    """
     def __init__(self, driver, config_provider: ConfigProvider):
         ui_config = config_provider.get_ui_config()
         self.__url = ui_config['homepage_url']
         self.__driver = driver
 
+    @allure.step("Получение главной страницы")
     def go(self):
         self.__driver.get(self.__url)
 
@@ -25,6 +38,7 @@ class HomePage:
     
     @allure.step("Получить страницу с результатом поиска")
     def get_search_result_message(self) -> str:
+        """return: Текст результата поиска или сообщение об ошибке."""
         try:
             result_element_1 = WebDriverWait(self.__driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'p.search-page__found-message')))
             result_element_1 = self.__driver.find_element(By.CSS_SELECTOR, "p.search-page__found-message")

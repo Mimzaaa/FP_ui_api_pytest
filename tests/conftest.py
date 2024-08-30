@@ -16,18 +16,22 @@ def browser():
     with allure.step("Закрыть браузер"):
         browser.quit()
 
+"""Фикстура для создания клиента API"""
+@pytest.fixture 
+def api_client(config_provider):
+    return ApiReadCity(config_provider)
+
+"""Фикстура для предоставления конфигурации"""
 @pytest.fixture
 def config_provider():
     return ConfigProvider()
 
+"""Фикстура для предоставления тестовых данных"""
 @pytest.fixture
 def data_provider():
     return DataProvider()
 
-@pytest.fixture
-def api_client(config_provider):
-    return ApiReadCity(config_provider)
-
+"""Фикстура для предоставления тестовых данных"""
 @pytest.fixture()
 def test_data():
     return DataProvider()
