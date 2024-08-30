@@ -9,11 +9,12 @@ API-тесты выполнены методами GET, POST, DELETE и PATCH. �
 
 Перед запуском теста нужно обновить токен в файле test_config.ini.
 
+### Финальный проект по ручному тестированию
+https://possible-bolt-045.notion.site/ea4f5376189f4060a39cf01941249492?pvs=4
+
 ### Шаги:
 1. Склонировать проект 'git clone https://github.com/Mimzaaa/FP_ui_api_pytest.git'
-2. Установить зависимости 
-3. Прописать ui-тесты
-4. Прописать api-тесты
+2. Установить зависимости 'pip install -r requirements.txt'
 3. Запустить тесты 'pytest --alluredir=./allure-results'
 4. Сгенерировать отчет 'allure generate allure-results -o allure-report'
 5. Открыть отчет 'allure serve allure-results'
@@ -21,9 +22,12 @@ API-тесты выполнены методами GET, POST, DELETE и PATCH. �
 ### Стек:
 - pytest
 - selenium
+- webdriver manager
 - requests
 - allure
 - config
+- configparser
+- json
 
 ### Струткура:
 - ./test - тесты
@@ -33,16 +37,10 @@ API-тесты выполнены методами GET, POST, DELETE и PATCH. �
     - test_config.ini - настройки для тестов
 - ./testdata - провайдер тестовых данных
     - test_data.json
+- ./requirements.txt - зависимости
 
 ### Полезные ссылки:
 - [Подсказка по markdown](https://www.markdownguide.org/basic-syntax/)
 - [Генератор файла .gitignore](https://www.toptal.com/developers/gitignore/)
 - [Про configparser](https://docs.python.org/3/library/configparser.html#module-configparser)
 - [Про pip freeze](https://pip.pypa.io/en/stable/cli/pip_freeze/)
-
-### Библиотеки:
-- pip3 install pytest
-- pip3 install selenium
-- pip3 install webdriver-manager
-- pip3 install allure-pytest
-- pip3 install requests
